@@ -1,5 +1,5 @@
 import firebase from 'firebase/app';
-import 'firebase/database';
+import { getDatabase, onValue, ref, set } from "firebase/database";
 import { useObjectVal } from 'react-firebase-hooks/database';
 
 const firebaseConfig = {
@@ -17,4 +17,8 @@ firebase.initializeApp(firebaseConfig);
 
 export const useData = (path, transform) => (
   useObjectVal(firebase.database().ref(path), { transform })
+);
+
+export const setData = (path, value) => (
+  firebase.database().ref(path).set(value)
 );
